@@ -1,0 +1,23 @@
+services:
+  app:
+    build:
+      context: .
+    container_name: match-odds-api
+    depends_on:
+       - db
+    environment:
+        - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/matchdb
+        - SPRING_DATASOURCE_USERNAME=root
+        - SPRING_DATASOURCE_PASSWORD=root
+    ports:
+      - "8080:8080"
+
+  db:
+    image: postgres
+    container_name: match-odds-db
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=matchdb
+    ports:
+      - "5432:5432"
